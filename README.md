@@ -1,12 +1,58 @@
-# React + Vite
+# Trouve ton artisan – Auvergne-Rhône-Alpes
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Application full-stack **React + Vite** (front) / **Express + Sequelize + MySQL** (back) pour rechercher des **artisans** par **catégorie** et **spécialité**, avec pages de base, favicons, police **Graphik**, **Bootstrap 5 + Sass**, et scripts SQL de création/seed.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Sommaire
+- [Aperçu](#aperçu)
+- [Stack & Structure](#stack--structure)
+- [Prérequis](#prérequis)
+- [Installation & Lancement (dev)](#installation--lancement-dev)
+- [Variables d’environnement](#variables-denvironnement)
+- [Base de données (SQL)](#base-de-données-sql)
+- [Endpoints principaux](#endpoints-principaux)
+- [Front : Navigation & Fonctionnalités](#front--navigation--fonctionnalités)
+- [Sécurité (mesures mises en place)](#sécurité-mesures-mises-en-place)
+- [MCD / MLD (résumé)](#mcd--mld-résumé)
+- [Déploiement (pistes)](#déploiement-pistes)
+- [Liens à fournir dans le dossier PDF](#liens-à-fournir-dans-le-dossier-pdf)
+- [Licence](#licence)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Stack & Structure
+
+**Front :**
+- React + Vite
+- Bootstrap 5 via **Sass** (`@use`)
+- Police **Graphik** (fichiers `.woff2/.woff` locaux) + fallback Poppins (Google Fonts)
+- Proxy Vite → `/api` vers `http://localhost:4001`
+
+**Back :**
+- Express
+- Sequelize + MySQL2
+- Models : `Category` → `Specialty` → `Artisan`
+
+**Arborescence :**
+devoir-trouve-ton-artisan/
+├─ client/ # Frontend
+│ ├─ public/
+│ │ ├─ favicon.png, favicon-32.png, Logo.png
+│ │ └─ fonts/Graphik/Graphik-Regular.{woff2,woff}
+│ ├─ src/
+│ │ ├─ styles/ (_variables.scss, main.scss)
+│ │ ├─ components/ (Header, Footer, ...)
+│ │ ├─ pages/ (Home, CategoryList, 404, ...)
+│ │ ├─ App.jsx, main.jsx
+│ │ └─ vite.config.js
+│ └─ package.json
+└─ server/ # Backend
+├─ src/
+│ ├─ models/ (Category, Specialty, Artisan)
+│ ├─ controllers/ (categories, artisans)
+│ ├─ routes/ (health, categories, artisans)
+│ ├─ config/db.js, app.js, index.js
+├─ sql/ (create_schema.sql, seed_data.sql)
+├─ .env.example
+└─ package.json

@@ -1,0 +1,17 @@
+/* Charge nos variables + @font-face en global */
+@use "./_variables.scss" as *;
+
+/* IMPORTANT: ne pas importer Bootstrap en global */
+/* On le namespacera pour éviter les collisions de variables */
+@use "bootstrap/scss/bootstrap" as bs;
+
+/* Styles globaux */
+body {
+  /* $body-bg provient de _variables.scss (NOTRE valeur) */
+  background-color: $body-bg;
+}
+
+/* Exemple: si tu veux utiliser une utilité/mixin Bootstrap,
+   tu peux y accéder via le namespace bs. Ex:
+   .exemple { @include bs.border-radius($border-radius); }
+*/
